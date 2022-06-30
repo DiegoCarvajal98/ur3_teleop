@@ -1,0 +1,12 @@
+<launch>
+    <arg name="world_name" default="$(find ur3_teleoperation)/worlds/teleop.world" />
+    <arg name="ur_robot" default="ur3"/>
+    <arg name="grasp_plugin" default="1"/>
+    
+    <include file="$(find ur3_gazebo)/launch/ur_gripper_85_cubes.launch">
+        <arg name="world_name" value="$(arg world_name)"/>
+        <arg name="ur_robot" value="$(arg ur_robot)"/>
+    </include>
+
+    <node name="camera_tf" pkg="tf" type="static_transform_publisher" args="0 -0.31 0.51 0 0 -2.095358 world camera_link 100" />
+</launch>
