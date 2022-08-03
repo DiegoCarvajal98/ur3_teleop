@@ -1,7 +1,15 @@
 <launch>
-    <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="world_name" value="$(find ur3_teleoperation)/worlds/teleop.world"/>
-      <!-- more default parameters can be changed here -->
+  <!-- Export env variable so that gazebo finds our models -->
+  <env name="GAZEBO_MODEL_PATH"
+       value="$(find ur3_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  <!-- Ignore online database -->
+  <env name="GAZEBO_MODEL_DATABASE_URI"
+       value="/" />
+       
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="true"/>
+    <!-- more default parameters can be changed here -->
     </include>
+  <arg name="world_name" value="$(find ur3_teleoperation)/worlds/teleop.world"/>
 </launch>

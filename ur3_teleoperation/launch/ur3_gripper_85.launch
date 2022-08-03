@@ -8,5 +8,6 @@
         <arg name="ur_robot" value="$(arg ur_robot)"/>
     </include>
 
-    <node name="camera_tf" pkg="tf" type="static_transform_publisher" args="0 -0.31 0.51 0 0 -2.095358 world camera_link 100" />
+    <node name="camera_tf" pkg="tf" type="static_transform_publisher" 
+        args="-0.2 0.0 0.765 0 0 -2.5 world camera_link 100" />
 </launch>

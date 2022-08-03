@@ -1,4 +1,6 @@
 <launch>
+
+    <arg name="real_robot" default="false"/>
     <!-- Specific ur robot -->
     <arg name="ur_robot" default="ur3"/>
   
@@ -71,5 +73,10 @@
     <include file="$(find ur_gripper_85_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
       <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
     </include>
+
+    <group if="$(eval real_robot == true)">
+      <node name="world_transform" pkg="tf" type="static_transform_publisher" 
+      args="0 0 0 0 0 0 base world 100"/>
+    </group>
   
   </launch>
