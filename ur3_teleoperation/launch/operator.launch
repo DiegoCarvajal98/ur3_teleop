@@ -1,12 +1,14 @@
 <launch>
+    <arg name="haptic_port" default="/dev/ttyACM0"/>
+
     <!-- ROSSerial Node for haptic tool -->
     <node pkg="rosserial_python" type="serial_node.py" name="haptic_serial">
-        <param name="port" value="/dev/ttyACM0"/>
+        <param name="port" value="$(arg haptic_port)"/>
     </node>
 
     <!-- usb_cam node for image capture -->
     <include file='$(find ur3_teleoperation/launch/usb_cam_stream_publisher.launch'/>
-    
+
     <!-- ArUco marker recognition node -->
     <include file='$(find ur3_teleoperation/launch/aruco_marker_finder.launch'/>
     

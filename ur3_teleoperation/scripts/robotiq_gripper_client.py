@@ -12,6 +12,8 @@ class GripperClient():
         self.robotiq_client = actionlib.SimpleActionClient(self.action_name, CommandRobotiqGripperAction)
         self.robotiq_client.wait_for_server()
 
+        # gripper calibration client
+
         self.tool_min = rospy.get_param('/tool_min')
         self.tool_max = rospy.get_param('/tool_max')
         self.tool_range = self.tool_max-self.tool_min

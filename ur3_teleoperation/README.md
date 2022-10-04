@@ -53,10 +53,10 @@ To control the robot with Rviz, launch Rviz tool for Moveit:
 
 ## Robot system nodes
 
-* Camera to base_link static transform publisher node
-* Gripper control client node
-* Gripper control server node
+* usb_cam node for teleoperation space visualization
 * ur_ros_control node
+* Camera to base_link static transform publisher node
+* Gripper control server node
+* Gripper control client node (tool calibration client)
 * UR3 moveit commander node
 * ROSSerial node for the force sensor
-* usb_cam node for teleoperation space visualization
