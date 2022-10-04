@@ -42,3 +42,22 @@ To control the robot with Rviz, launch Rviz tool for Moveit:
   ```
   $ roslaunch ur3_teleoperation ur3_moveit.launch real_robot:=true
   ```
+
+## Operator system nodes
+
+* ROSSerial node for haptic tool
+* usb_cam node for tool pose capture
+* ArUco node for tool pose capture
+* rqt_image_view node for user feedback
+* Tool calibration server
+* Tool calibration client
+
+## Robot system nodes
+
+* Camera to base_link static transform publisher node
+* Gripper control client node
+* Gripper control server node
+* ur_ros_control node
+* UR3 moveit commander node
+* ROSSerial node for the force sensor
+* usb_cam node for teleoperation space visualization
