@@ -7,7 +7,7 @@ UR3 Robot Teleoperation
 
 Custom ROS package for teleoperation of the UR3 Robot with Robotiq 2F-85 gripper
 
-## Simulation in Gazebo
+## Gazebo Simulation
 
 Initialize Gazebo simulation:
   ```
@@ -26,29 +26,19 @@ Run the collision objects node to add the table and UR3 base collision objects t
 
 ## Real robot control
 
+Look up the computer IP, set the IP on the UR3 configuration
+
 Launch the UR3 Robot driver launch file with the robot ip and calibration file:
   ```
-  $ roslaunch ur_robot_driver ur3_bringup.launch robot_ip:=<robot_ip> kinematics_config:=$(rospack find ur3_teleoperation)/calibration/my_robot_calibration.yaml
+  $ roslaunch ur_robot_driver ur3_bringup.launch robot_ip:=<robot_ip> kinematics_config:=$(rospack find ur3_teleoperation)/calibration/robot_calibration.yaml
   ```
 
-Launch Rviz for Moveit control and visualization:
+Launch the Robotiq 2F-85 gripper server and the gripper's communication port:
+  ```
+  $ roslaunch robotiq_2f_gripper_control robotiq_action_server.launch comport:=/dev/ttyUSB0
+  ```
+
+To control the robot with Rviz, launch Rviz tool for Moveit:
   ```
   $ roslaunch ur3_teleoperation ur3_moveit.launch real_robot:=true
-  ```
-
-## Realsense D435
-
-Launch the RealSense camera:
-  ```
-  $ roslaunch realsense2_camera rs_camera.launch filters:=pointcloud initial_reset:=true
-  ```
-
-### Record bag file
-  ```
-  $ rosbag record -O session1.bag --duration=2m rosout tf tf_static camera/depth/color/points camera/color/image_raw
-  ```
-
-### Play bag file
-  ```
-  $ rosbag play session.bag
   ```
