@@ -1,0 +1,19 @@
+<launch>
+    <!-- ROSSerial Node for haptic tool -->
+    <node pkg="rosserial_python" type="serial_node.py" name="haptic_serial">
+        <param name="port" value="/dev/ttyACM0"/>
+    </node>
+
+    <!-- usb_cam node for image capture -->
+    <include file='$(find ur3_teleoperation/launch/usb_cam_stream_publisher.launch'/>
+    
+    <!-- ArUco marker recognition node -->
+    <include file='$(find ur3_teleoperation/launch/aruco_marker_finder.launch'/>
+    
+    <!-- Robot space image feedback node -->
+    <node pkg="rqt_image_view" type="rqt_image_view" name="robot_camera_visualization"/>
+
+    <!-- Haptic tool min and max ranges calibration server -->
+    <!--node pkg="ur3_teleoperation" type="haptic_calibration_server" name="haptic_calibration_server"-->
+    
+</launch>
