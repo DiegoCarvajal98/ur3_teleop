@@ -50,7 +50,6 @@ To control the robot with Rviz, launch Rviz tool for Moveit:
 * ArUco node for tool pose capture
 * rqt_image_view node for user feedback
 * Tool calibration server
-* Tool calibration client
 
 ## Robot system nodes
 
