@@ -16,6 +16,6 @@
     <node pkg="rqt_image_view" type="rqt_image_view" name="robot_camera_visualization"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
-    <!--node pkg="ur3_teleoperation" type="haptic_calibration_server" name="haptic_calibration_server"-->
+    <!--node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server"-->
     
 </launch>
