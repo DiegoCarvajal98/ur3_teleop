@@ -87,7 +87,7 @@ void leerEncoderA(){
   int b = digitalRead(ENCODER_B);
   if(digitalRead(ENCODER_B == LOW)){
     //Decremento variable global
-    theta--;
+    theta++;
   }
 }
 
@@ -95,6 +95,6 @@ void leerEncoderB(){
   int a = digitalRead(ENCODER_A);
   if(digitalRead(ENCODER_A == LOW)){
     //Incremento variable global
-    theta++;
+    theta--;
   }
 }
