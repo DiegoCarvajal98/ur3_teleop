@@ -5,14 +5,14 @@ from std_srvs.srv import Empty, EmptyResponse
 from std_msgs.msg import Float32
 
 class ToolCalibration():
-    def __init__(self) -> None:
+    def __init__(self):
         self.tool_angle_subscriber = rospy.Subscriber('tool_angle', Float32, self.toolAngleCallback)
         self.server = rospy.Service('tool_calibration',Empty,self.handleToolCalibration)
 
-    def toolAngleCallback(self,msg) -> None:
+    def toolAngleCallback(self,msg):
         self.tool_angle = msg.data
 
-    def handleToolCalibration(self,req) -> EmptyResponse:
+    def handleToolCalibration(self,req):
         rospy.loginfo("Set the tool to the minimum opening")
 
         start_time = rospy.Time.now().secs
