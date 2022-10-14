@@ -15,7 +15,7 @@
     <!-- ArUco marker recognition node -->
     <include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/>
     
-    <!-- Robot space image feedback node -->
+    <!-- Robot space image feedback node camera/color/image_raw-->
     <node pkg="rqt_image_view" type="rqt_image_view" name="robot_camera_visualization"/>
 
     <!-- Haptic tool min and max ranges calibration server -->

@@ -2,9 +2,7 @@
     <arg name="haptic_port" default="/dev/ttyACM0"/>
 
     <!-- ROSSerial Node for haptic tool -->
-    <node pkg="rosserial_python" type="serial_node.py" name="haptic_serial">
-        <param name="port" value="$(arg haptic_port)"/>
-    </node>
+    <node pkg="rosserial_python" type="serial_node.py" name="haptic_serial" args="$(arg haptic_port)"/>
 
     <!-- Motor activation node -->
     <node pkg="ur3_teleoperation" type="motor_activation.py" 

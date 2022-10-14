@@ -9,5 +9,5 @@
     </include>
 
     <node name="camera_tf" pkg="tf" type="static_transform_publisher" 
-        args="-0.2 0.0 0.765 0 0 -2.5 world camera_link 100" />
+        args="0 0.2 1.75 0 0 -1.8 world camera_link 100" />
 </launch>
