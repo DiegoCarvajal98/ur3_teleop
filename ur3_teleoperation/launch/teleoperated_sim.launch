@@ -4,8 +4,8 @@
     <arg name="image_height" default="480"/>
     <arg name="robot_ip" default="172.16.123.44"/>
     <arg name="kinematics_config" default="$(find ur3_teleoperation)/calibration/robot_calibration.yaml"/>
-    <!--arg name="gripper_comport" default="/dev/ttyUSB0"/-->
-    <!--arg name="force_port" default="/dev/ttyACM0"/-->
+    <arg name="gripper_comport" default="/dev/ttyUSB0"/>
+    <arg name="force_port" default="/dev/ttyACM0"/>
     <arg name="ur_robot" default="ur3"/>
     <arg name="debug" default="false" />
 
@@ -13,9 +13,9 @@
     <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="1.5 0 0.25 0 0 3.14159 base_link camera_link 100"/>
 
     <!-- Robotiq 2F-85 Gripper control server node -->
-    <!--node pkg="robotiq_2f_gripper_control" type="robotiq_2f_action_server.py" name="robotiq_control_server">
+    <node pkg="robotiq_2f_gripper_control" type="robotiq_2f_action_server.py" name="robotiq_control_server">
         <arg name="comport" value="$(arg gripper_comport"/>
-    </node-->
+    </node>
 
     <!-- UR3 Simulation -->
     <!--include file="$(find ur3_teleoperation)/launch/ur3_gripper_85.launch"/-->
@@ -36,7 +36,5 @@
     <!--node pkg="ur3_teleoperation" type="robotiq_gripper_client.py" name="robotiq_control_client"/-->
 
     <!-- ROSSerial node for gripper force sensor -->
-    <!--node pkg="rosserial_python" type="serial_node.py" name="force_serial_node">
-        <arg name="port" value="$(arg force_port)"/>
-    </node-->
+    <node pkg="rosserial_python" type="serial_node.py" name="force_serial_node" args="$(arg force_port)"/>
 </launch>
