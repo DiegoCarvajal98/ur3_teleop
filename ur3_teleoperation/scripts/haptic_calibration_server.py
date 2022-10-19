@@ -22,7 +22,7 @@ class ToolCalibration():
         
         tool_min = self.tool_angle
         rospy.set_param('/tool_min', tool_min)
-        rospy.loginfo('Haptic tool minimum opening set to {tool_min}')
+        rospy.loginfo('Haptic tool minimum opening set to %d', tool_min)
 
         rospy.loginfo("Set the tool to the maximum opening")
 
@@ -33,7 +33,7 @@ class ToolCalibration():
         
         tool_max = self.tool_angle
         rospy.set_param('/tool_max', tool_max)
-        rospy.loginfo('Haptic tool maximum opening set to {tool_max}')
+        rospy.loginfo('Haptic tool maximum opening set to %d', tool_max)
 
         return EmptyResponse()
 
