@@ -15,7 +15,7 @@
     <include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/>
     
     <!-- Robot space image feedback node -->
-    <node pkg="rqt_gui" type="rqt_gui" name="robot_camera_visualization"/>
+    <node pkg="rqt_gui" type="rqt_gui" name="robot_camera_visualization" args="--perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
     <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server"/>
