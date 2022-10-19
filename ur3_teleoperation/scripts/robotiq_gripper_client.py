@@ -9,9 +9,10 @@ from robotiq_2f_gripper_control.robotiq_2f_gripper_driver import Robotiq2FingerG
 
 class GripperClient():
 
-    def toolAngleCallback(self,msg):
-        gripper_opening = (0.085*(msg.data-self.tool_min))/self.tool_range
-        
+    def toolAngleCallback(self, msg):
+        gripper_opening = (0.085*(msg.data - self.tool_min))/self.tool_range
+        rospy.logdebug(msg.data)
+
         Robotiq.goto(self.robotiq_client, pos=gripper_opening, speed=0.1, force=5)
 
     def calibrationClient(self):
@@ -20,22 +21,25 @@ class GripperClient():
 
         tool_request = EmptyRequest()
 
-        result = tool_calibration(tool_request)
+        return tool_calibration(tool_request)
 
     def __init__(self):
         self.action_name = rospy.get_param('~action_name', 'command_robotiq_action')
         self.robotiq_client = actionlib.SimpleActionClient(self.action_name, CommandRobotiqGripperAction)
         self.robotiq_client.wait_for_server()
 
-        self.calibrationClient()
-
+        rospy.loginfo("Starting calibration")
+        result = self.calibrationClient()
+        rospy.loginfo("Finished calibration")
         self.tool_min = rospy.get_param('/tool_min')
         self.tool_max = rospy.get_param('/tool_max')
+        rospy.loginfo(self.tool_min)
+        rospy.loginfo(self.tool_max)
         self.tool_range = self.tool_max-self.tool_min
 
-        rospy.Subscriber('tool_angle', Float32, self.toolAngleCallback)
+        rospy.Subscriber('tool_angle', Float32, self.toolAngleCallback, queue_size=1)
+        rospy.spin()
 
 if __name__ == '__main__':
-    rospy.init_node('gripper_client')
-    gripper_client = GripperClient
-    rospy.spin()
+    rospy.init_node('gripper_client',log_level=rospy.INFO)
+    gripper_client = GripperClient()

@@ -6,8 +6,8 @@ from std_msgs.msg import Float32, Bool
 class MotorActivation():
     def __init__(self):
         self.activation = False
-        self.force_sub = rospy.Subscriber('gripper_force',Float32,self.gripperForceCallback)
-        self.motor_publisher = rospy.Publisher('motor_activation',Bool,queue_size=10)
+        self.force_sub = rospy.Subscriber('gripper_force',Float32,self.gripperForceCallback,queue_size=1)
+        self.motor_publisher = rospy.Publisher('motor_activation',Bool,queue_size=1)
 
     def gripperForceCallback(self,msg):
         force = msg.data
