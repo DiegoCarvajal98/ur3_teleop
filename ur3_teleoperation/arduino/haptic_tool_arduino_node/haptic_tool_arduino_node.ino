@@ -41,7 +41,6 @@ ros::Publisher angle_publisher("tool_angle", &angle);
 ros::Subscriber<std_msgs::Bool> motor_subscriber("motor_activation", &SubscriberCallback);
 
 void setup() {
-  Serial.begin(115200);
   // set timer 1 divisor to  1024 for PWM frequency of 30.64 Hz
   //TCCR1B = TCCR1B & B11111000 | B00000101;
 
