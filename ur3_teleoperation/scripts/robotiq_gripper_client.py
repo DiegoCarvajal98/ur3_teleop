@@ -10,10 +10,15 @@ from robotiq_2f_gripper_control.robotiq_2f_gripper_driver import Robotiq2FingerG
 class GripperClient():
 
     def toolAngleCallback(self, msg):
-        gripper_opening = (0.085*(msg.data - self.tool_min))/self.tool_range
+        gripper_openning = (0.085*(msg.data - self.tool_min))/self.tool_range
         rospy.logdebug(msg.data)
 
-        Robotiq.goto(self.robotiq_client, pos=gripper_opening, speed=0.1, force=5)
+        if gripper_openning > self.tool_max:
+            gripper_openning = self.tool_max
+        elif gripper_openning < self.tool_min:
+            gripper_openning = self.tool_min
+
+        Robotiq.goto(self.robotiq_client, pos=gripper_openning, speed=0.1, force=5)
 
     def calibrationClient(self):
         rospy.wait_for_service('tool_calibration')
