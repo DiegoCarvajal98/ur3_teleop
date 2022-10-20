@@ -2,6 +2,7 @@
 
 import rospy
 import sys
+import tf
 import moveit_commander
 import moveit_msgs.msg
 from geometry_msgs.msg import PoseStamped, Pose
@@ -22,9 +23,11 @@ class UR3MoveGroup(object):
     def __init__(self):
         
         moveit_commander.roscpp_initialize(sys.argv)
+        self.listener = tf.TransformListener()
 
         self.robot = moveit_commander.RobotCommander()
         self.scene = moveit_commander.PlanningSceneInterface()
+        self.pose_goal = Pose()
         group_name = "arm"
         self.move_group = moveit_commander.MoveGroupCommander(group_name)
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
@@ -42,8 +45,27 @@ class UR3MoveGroup(object):
         self.move_group.go(joint_goal, wait=True)
         self.move_group.stop()
 
-        self.aruco_pose_subscriber = rospy.Subscriber('/aruco_single/pose', PoseStamped, 
-                                                        self.arucoPoseCallback)
+        while not rospy.is_shutdown():
+            try:
+                (trans,rot) = self.listener.lookupTransform('/marker_frame','/base', rospy.Time(0))
+            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
+                continue
+            
+            self.pose_goal.position.x = trans[0]
+            self.pose_goal.position.y = trans[1]
+            self.pose_goal.position.z = trans[2]
+
+            self.pose_goal.orientation.x = rot[0]
+            self.pose_goal.orientation.y = rot[1]
+            self.pose_goal.orientation.z = rot[2]
+            self.pose_goal.orientation.w = rot[3]
+
+            self.move_group.set_pose_target(self.pose_goal)
+
+            plan = self.move_group.go(wait=True)
+            self.move_group.stop()
+            self.move_group.clear_pose_target()
+
 
 if __name__ == '__main__':
     rospy.init_node('ur3_movegroup', anonymous=True)
