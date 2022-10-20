@@ -59,7 +59,11 @@ class UR3MoveGroup(object):
 
             self.move_group.set_pose_target(self.pose_goal)
 
+            rospy.logdebug("Planning path")
+
             plan = self.move_group.go(wait=True)
+
+            rospy.logdebug("Plan executed")
             self.move_group.stop()
             self.move_group.clear_pose_target()
 
@@ -67,6 +71,6 @@ class UR3MoveGroup(object):
 
 
 if __name__ == '__main__':
-    rospy.init_node('ur3_movegroup', anonymous=True)
+    rospy.init_node('ur3_movegroup', anonymous=True, log_level=rospy.DEBUG)
     ur3_movegroup = UR3MoveGroup()
     rospy.spin()
