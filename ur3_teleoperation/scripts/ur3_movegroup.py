@@ -6,12 +6,16 @@ import tf
 import moveit_commander
 import moveit_msgs.msg
 from geometry_msgs.msg import PoseStamped, Pose
+from sensor_msgs.msg import Image
 from moveit_commander.conversions import pose_to_list
 from math import pi
 
 class UR3MoveGroup(object):
         
     def __init__(self):
+
+        def arucoCallback(self, msg):
+            pass
         
         moveit_commander.roscpp_initialize(sys.argv)
         self.listener = tf.TransformListener()
@@ -25,6 +29,7 @@ class UR3MoveGroup(object):
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                         moveit_msgs.msg.DisplayTrajectory,
                                                         queue_size=20)
+        self.aruco_subscriber = rospy.Subscriber('/aruco_single/result', Image, arucoCallback,queue_size=5)
         
         joint_goal = self.move_group.get_current_joint_values()
         joint_goal[0] = pi/2
@@ -39,7 +44,7 @@ class UR3MoveGroup(object):
 
         while not rospy.is_shutdown():
             try:
-                (trans,rot) = self.listener.lookupTransform('/marker_frame','/base', rospy.Time(0))
+                (trans,rot) = self.listener.lookupTransform('/marker_frame','/base_link', rospy.Time(0))
             except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
                 continue
             
