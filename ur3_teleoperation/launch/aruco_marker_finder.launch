@@ -15,7 +15,7 @@
         <param name="marker_size" value="$(arg markerSize)"/>
         <param name="marker_id" value="$(arg markerId)"/>
         <param name="reference_frame" value="$(arg ref_frame)"/> <!-- frame in which the marker pose will be refered -->
-        <param name="camera_frame" value="camera_link"/>
+        <param name="camera_frame" value="aruco_camera_link"/>
         <param name="marker_frame" value="$(arg marker_frame)" />
         <param name="corner_refinement" value="$(arg corner_refinement)" />
     </node>

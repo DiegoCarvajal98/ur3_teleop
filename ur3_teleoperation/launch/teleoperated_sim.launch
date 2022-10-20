@@ -10,7 +10,7 @@
     <arg name="debug" default="false" />
 
     <!-- Camera_link to base_link static transform publisher -->
-    <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 0.25 0 0 -1.57 world aruco_camera_link 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/>
 
     <!-- Robotiq 2F-85 Gripper control server node -->
     <!--node pkg="robotiq_2f_gripper_control" type="robotiq_2f_action_server.py" name="robotiq_control_server" args="comport:=$(arg gripper_comport)"/-->
