@@ -10,15 +10,6 @@ from moveit_commander.conversions import pose_to_list
 from math import pi
 
 class UR3MoveGroup(object):
-    def arucoPoseCallback(self, msg):
-        pose_goal = Pose()
-        pose_goal = msg.pose
-
-        self.move_group.set_pose_target(pose_goal)
-
-        plan = self.move_group.go(wait=True)
-        self.move_group.stop()
-        self.move_group.clear_pose_target()
         
     def __init__(self):
         
@@ -29,6 +20,7 @@ class UR3MoveGroup(object):
         self.scene = moveit_commander.PlanningSceneInterface()
         self.pose_goal = Pose()
         group_name = "arm"
+        rate = rospy.Rate(10)
         self.move_group = moveit_commander.MoveGroupCommander(group_name)
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                         moveit_msgs.msg.DisplayTrajectory,
@@ -65,6 +57,8 @@ class UR3MoveGroup(object):
             plan = self.move_group.go(wait=True)
             self.move_group.stop()
             self.move_group.clear_pose_target()
+
+            rate.sleep()
 
 
 if __name__ == '__main__':
