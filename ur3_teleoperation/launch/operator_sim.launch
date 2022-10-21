@@ -22,7 +22,7 @@
     <node pkg="rqt_image_view" type="rqt_image_view" 
         name="robot_camera_visualization"/>
     <node pkg="rqt_gui" type="rqt_gui" name="operator_viz" 
-        args="perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
+        args="--perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
     <!--node pkg="ur3_teleoperation" type="haptic_calibration_server.py" 
