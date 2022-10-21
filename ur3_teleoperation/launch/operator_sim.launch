@@ -3,29 +3,29 @@
     <arg name="camera_port" default="/dev/video0"/>
 
     <!-- ROSSerial Node for haptic tool -->
-    <node pkg="rosserial_python" type="serial_node.py" 
-        name="haptic_serial" args="$(arg haptic_port)"/>
+    <!--node pkg="rosserial_python" type="serial_node.py" 
+        name="haptic_serial" args="$(arg haptic_port)"/-->
 
     <!-- Motor activation node -->
     <!--node pkg="ur3_teleoperation" type="motor_activation.py" 
         name="motor_activation"/-->
 
     <!-- usb_cam node for image capture -->
-    <!--include file='$(find ur3_teleoperation)/launch/usb_cam_stream_publisher.launch'>
+    <include file='$(find ur3_teleoperation)/launch/usb_cam_stream_publisher.launch'>
         <arg name="video_device" value="$(arg camera_port)"/>
-    </include-->
+    </include>
 
     <!-- ArUco marker recognition node -->
-    <!--include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/-->
+    <include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/>
     
     <!-- Robot space image feedback node camera/color/image_raw-->
-    <!--node pkg="rqt_image_view" type="rqt_image_view" 
-        name="robot_camera_visualization"/-->
-    <!--node pkg="rqt_gui" type="rqt_gui" name="operator_viz" 
-        args="perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/-->
+    <node pkg="rqt_image_view" type="rqt_image_view" 
+        name="robot_camera_visualization"/>
+    <node pkg="rqt_gui" type="rqt_gui" name="operator_viz" 
+        args="perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
-    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" 
-        name="haptic_calibration_server" output="screen"/>
+    <!--node pkg="ur3_teleoperation" type="haptic_calibration_server.py" 
+        name="haptic_calibration_server" output="screen"/-->
     
 </launch>

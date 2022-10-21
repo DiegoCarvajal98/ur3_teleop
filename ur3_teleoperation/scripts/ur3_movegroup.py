@@ -26,7 +26,7 @@ class UR3MoveGroup(object):
         self.move_group = moveit_commander.MoveGroupCommander(group_name)
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                         moveit_msgs.msg.DisplayTrajectory,
-                                                        queue_size=20)
+                                                        queue_size=10)
         # self.aruco_subscriber = rospy.Subscriber('/aruco_single/result', Image, arucoCallback,queue_size=5)
         
         joint_goal = self.move_group.get_current_joint_values()
