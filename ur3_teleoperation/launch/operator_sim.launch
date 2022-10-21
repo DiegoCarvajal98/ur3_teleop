@@ -3,8 +3,8 @@
     <arg name="camera_port" default="/dev/video0"/>
 
     <!-- ROSSerial Node for haptic tool -->
-    <!--node pkg="rosserial_python" type="serial_node.py" 
-        name="haptic_serial" args="$(arg haptic_port)"/-->
+    <node pkg="rosserial_python" type="serial_node.py" 
+        name="haptic_serial" args="$(arg haptic_port)"/>
 
     <!-- Motor activation node -->
     <!--node pkg="ur3_teleoperation" type="motor_activation.py" 
@@ -25,7 +25,7 @@
         args="--perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
-    <!--node pkg="ur3_teleoperation" type="haptic_calibration_server.py" 
-        name="haptic_calibration_server" output="screen"/-->
+    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" 
+        name="haptic_calibration_server" output="screen"/>
     
 </launch>
