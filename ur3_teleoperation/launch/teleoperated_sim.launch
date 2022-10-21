@@ -10,10 +10,10 @@
     <arg name="debug" default="false" />
 
     <!-- Camera_link to base_link static transform publisher -->
-    <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/>
+    <!--node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/-->
 
     <!-- ArUco marker corrected frame static transform publisher -->
-    <node pkg="tf" type="static_transform_publisher" name="aruco_corrected_transform" args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/>
+    <!--node pkg="tf" type="static_transform_publisher" name="aruco_corrected_transform" args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/-->
 
     <!-- Robotiq 2F-85 Gripper control server node -->
     <node pkg="robotiq_2f_gripper_control" type="robotiq_2f_action_server.py" name="robotiq_control_server" args="comport:=$(arg gripper_comport)"/>
@@ -22,16 +22,16 @@
     <!--include file="$(find ur3_teleoperation)/launch/ur3_gripper_85.launch"/-->
 
     <!-- Simulated robot move group node -->
-    <include file="$(find ur_gripper_85_moveit_config)/launch/move_group.launch">
+    <!--include file="$(find ur_gripper_85_moveit_config)/launch/move_group.launch">
         <arg name="ur_robot" default="$(arg ur_robot)"/>
         <arg name="allow_trajectory_execution" value="true"/>
         <arg name="fake_execution" value="false"/>
         <arg name="info" value="true"/>
         <arg name="debug" value="$(arg debug)"/>
-    </include>
+    </include-->
 
     <!-- UR3 MoveIt Commander node -->
-    <node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node"/>
+    <!--node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node"/-->
 
     <!-- ROSSerial node for gripper force sensor -->
     <node pkg="rosserial_python" type="serial_node.py" name="force_serial_node" args="$(arg force_port)"/>
