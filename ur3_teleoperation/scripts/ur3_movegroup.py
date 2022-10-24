@@ -5,15 +5,14 @@ import sys
 import tf2_ros
 import moveit_commander
 from moveit_msgs.msg import DisplayTrajectory
-from geometry_msgs.msg import PoseStamped, Pose
-from sensor_msgs.msg import Image
+from geometry_msgs.msg import Pose
 from math import pi
 
 class UR3MoveGroup(object):
         
     def tfListenerCallback(self, event):
-        if self.tf_buffer.can_transform('aruco_corrected_frame','base_link',rospy.Time(0)):
-            trans = self.tf_buffer.lookup_transform('tool0','base_link',rospy.Time(0))
+        if self.tf_buffer.can_transform('base_link','aruco_corrected_frame',rospy.Time(0)):
+            trans = self.tf_buffer.lookup_transform('base_link','aruco_corrected_frame',rospy.Time(0))
 
             rospy.logdebug(trans)
 
@@ -65,6 +64,8 @@ class UR3MoveGroup(object):
 
         self.move_group.go(joint_goal, wait=True)
         self.move_group.stop()
+
+        self.pose_goal = Pose()
 
         rospy.Timer(rospy.Duration(0.1),self.tfListenerCallback)
 

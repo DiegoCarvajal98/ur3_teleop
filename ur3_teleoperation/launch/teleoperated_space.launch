@@ -25,6 +25,9 @@
         <arg name="kinematics_config" value="$(arg kinematics_config)"/>
     </include>
 
+    <!-- Collision objects for planning -->
+    <node pkg="ur3_teleoperation" type="collision_objects_node" name="collision_objects"/>
+
     <!-- Camera_link to base_link static transform publisher -->
     <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 0 0 0 0 0 base_link camera_link 100"/>
 
