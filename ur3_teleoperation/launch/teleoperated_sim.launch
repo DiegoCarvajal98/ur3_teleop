@@ -31,7 +31,7 @@
     </include>
 
     <!-- UR3 MoveIt Commander node -->
-    <node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node"/>
+    <node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node" output="screen"/>
 
     <!-- ROSSerial node for gripper force sensor -->
     <!--node pkg="rosserial_python" type="serial_node.py" name="force_serial_node" args="$(arg force_port)"/-->
