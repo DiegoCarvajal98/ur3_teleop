@@ -10,7 +10,7 @@
     <arg name="debug" default="false"/>
 
     <!-- usb_cam node for UR3 operation space -->
-    <node pkg="usb_cam" type="usb_cam_node" name="robot_cam" output="screen">
+    <node pkg="usb_cam" type="usb_cam_node" name="robot_cam" output="log">
         <param name="video_device" value="$(arg video_device)" />
         <param name="image_width" value="$(arg image_width)" />
         <param name="image_height" value="$(arg image_height)"/>

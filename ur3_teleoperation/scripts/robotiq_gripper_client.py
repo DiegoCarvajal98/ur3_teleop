@@ -18,7 +18,7 @@ class GripperClient():
         elif gripper_openning < self.tool_min:
             gripper_openning = self.tool_min
 
-        Robotiq.goto(self.robotiq_client, pos=gripper_openning, speed=0.1, force=5)
+        Robotiq.goto(self.robotiq_client, pos=gripper_openning, speed=0.05, force=5)
 
     def calibrationClient(self):
         rospy.wait_for_service('tool_calibration')
@@ -42,7 +42,7 @@ class GripperClient():
         rospy.loginfo(self.tool_max)
         self.tool_range = self.tool_max-self.tool_min
 
-        rospy.Subscriber('tool_angle', Float32, self.toolAngleCallback, queue_size=1)
+        rospy.Subscriber('tool_angle', Float32, self.toolAngleCallback, queue_size=5)
         rospy.spin()
 
 if __name__ == '__main__':

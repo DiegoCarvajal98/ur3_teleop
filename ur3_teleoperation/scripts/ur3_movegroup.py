@@ -24,16 +24,20 @@ class UR3MoveGroup(object):
             self.pose_goal.orientation.z = trans.transform.rotation.z
             self.pose_goal.orientation.w = trans.transform.rotation.w
 
-            self.move_group.set_pose_target(self.pose_goal)
+            waypoint = []
+
+            waypoint.append(self.pose_goal)
 
             rospy.loginfo("Planning path")
 
-            plan = self.move_group.go(wait=True)
+            (plan, fraction) = self.move_group.compute_cartesian_path(waypoint,
+                                                0.01,
+                                                0.0)
 
-            rospy.logdebug("Plan executed")
+            rospy.logdebug("Executing plan")
 
+            self.move_group.execute(plan, wait=True)
             self.move_group.stop()
-            self.move_group.clear_pose_targets()
 
         else:
             rospy.logdebug("Can't transform")
