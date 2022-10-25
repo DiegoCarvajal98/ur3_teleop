@@ -11,8 +11,8 @@ from math import pi
 class UR3MoveGroup(object):
         
     def tfListenerCallback(self, event):
-        if self.tf_buffer.can_transform('base_link','aruco_corrected_frame',rospy.Time(0)):
-            trans = self.tf_buffer.lookup_transform('base_link','aruco_corrected_frame',rospy.Time(0))
+        if self.tf_buffer.can_transform('base_link','marker_frame',rospy.Time(0)):
+            trans = self.tf_buffer.lookup_transform('base_link','marker_frame',rospy.Time(0))
 
             rospy.logdebug(trans)
 
@@ -64,7 +64,7 @@ class UR3MoveGroup(object):
         joint_goal[2] = pi/2
         joint_goal[3] = 0
         joint_goal[4] = pi/2
-        joint_goal[5] = pi
+        joint_goal[5] = 0
 
         self.move_group.go(joint_goal, wait=True)
         self.move_group.stop()
