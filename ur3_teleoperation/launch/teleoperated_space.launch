@@ -40,10 +40,10 @@
         args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/>
 
     <!-- Robotiq 2F-85 Gripper control server node -->
-    <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch"/>
+    <!--include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch"/-->
 
     <!-- Robotiq 2f-85 gripper control client -->
-    <node pkg="ur3_teleoperation" type="robotiq_gripper_client.py" name="robotiq_control_client"/>
+    <!--node pkg="ur3_teleoperation" type="robotiq_gripper_client.py" name="robotiq_control_client"/-->
 
     <!-- Robot move group node -->
     <include file="$(find ur_gripper_85_moveit_config)/launch/move_group.launch">
