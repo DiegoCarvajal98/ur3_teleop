@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   moveit_msgs
   moveit_ros_planning_interface
+  moveit_servo
 )
 
 find_package(Eigen3 REQUIRED)
@@ -109,7 +110,7 @@ find_package(Eigen3 REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES ur3_teleoperation
-  CATKIN_DEPENDS roscpp rospy std_msgs moveit_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs moveit_msgs moveit_servo
 #  DEPENDS system_lib
 )
 
@@ -149,6 +150,10 @@ include_directories(
   src/collision_objects_node.cpp
  )
 
+ add_executable(test_node 
+  src/test.cpp
+ )
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -163,6 +168,12 @@ include_directories(
  target_link_libraries(collision_objects_node
    ${catkin_LIBRARIES}
  )
+
+ target_link_libraries(test_node
+   ${catkin_LIBRARIES}
+ )
+ 
+# add_dependencies(test_node moveit_servo)
 
 #############
 ## Install ##

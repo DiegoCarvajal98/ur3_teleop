@@ -10,7 +10,7 @@
     <arg name="debug" default="false" />
 
     <!-- Camera_link to base_link static transform publisher -->
-    <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="camera_robot_transform" args="0 1.5 -0.25 3.14159 0 -1.046401 world aruco_camera_link 100"/>
 
     <!-- ArUco marker corrected frame static transform publisher -->
     <node pkg="tf" type="static_transform_publisher" name="aruco_corrected_transform" args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/>

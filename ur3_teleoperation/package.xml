@@ -60,7 +60,7 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <depend>moveit_msgs</depend>
-
+  <depend>moveit_servo</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

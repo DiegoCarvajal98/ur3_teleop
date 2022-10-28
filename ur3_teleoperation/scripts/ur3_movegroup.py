@@ -52,16 +52,15 @@ class UR3MoveGroup(object):
         self.scene = moveit_commander.PlanningSceneInterface()
         
         group_name = "arm"
-        rate = rospy.Rate(10)
         self.move_group = moveit_commander.MoveGroupCommander(group_name)
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                         DisplayTrajectory,
                                                         queue_size=10)
         
         joint_goal = self.move_group.get_current_joint_values()
-        joint_goal[0] = pi/2
+        joint_goal[0] = -pi/2
         joint_goal[1] = -pi/2
-        joint_goal[2] = pi/2
+        joint_goal[2] = -pi/2
         joint_goal[3] = 0
         joint_goal[4] = pi/2
         joint_goal[5] = 0
@@ -74,6 +73,6 @@ class UR3MoveGroup(object):
         rospy.Timer(rospy.Duration(0.1),self.tfListenerCallback)
 
 if __name__ == '__main__':
-    rospy.init_node('ur3_movegroup', anonymous=True, log_level=rospy.DEBUG)
+    rospy.init_node('ur3_movegroup', anonymous=True, log_level=rospy.INFO)
     ur3_movegroup = UR3MoveGroup()
     rospy.spin()
