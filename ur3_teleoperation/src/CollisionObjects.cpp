@@ -11,8 +11,8 @@ CollisionObjects::CollisionObjects(ros::NodeHandle& nh, std::string planning_gro
 	move_group_ptr_ = new moveit::planning_interface::MoveGroupInterface(planning_group);
 	joint_model_group_ = move_group_ptr_->getCurrentState()->getJointModelGroup(planning_group);
 
-	double table_dimensions[3] = {0.913, 0.913, 0.775};
-	double table_pose[3] = {-0.2, 0.64, -0.3025};
+	double table_dimensions[3] = {1, 0.75, 0.69};
+	double table_pose[3] = {0, 0.64, -0.36};
 
 	double base_dimensions[3] = {0.5, 0.5, 0.69};
 	double base_pose[3] = {0, -0.11, -0.345};

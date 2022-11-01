@@ -6,10 +6,14 @@
 #define FSR1 A0
 #define FSR2 A1
 
+const float a = 98.5202077002541;
+float b = 98.5202077002541;
+const float c = 0.1;
+
 ros::NodeHandle nd;
 
-SimpleKalmanFilter r1Filter = SimpleKalmanFilter(2, 2, 0.1);
-SimpleKalmanFilter r2Filter = SimpleKalmanFilter(2, 2, 0.1);
+SimpleKalmanFilter r1Filter = SimpleKalmanFilter(a, b, 0.1);
+SimpleKalmanFilter r2Filter = SimpleKalmanFilter(a, b, 0.1);
 
 float read_1;
 float read_2;
@@ -37,7 +41,8 @@ void loop() {
   force_1 = fmap(filtRead1, 0, 1023, 0, 2000);
   force_2 = fmap(filtRead2, 0, 1023, 0, 2000);
 
-  force.data = (force_1 + force_2)/2.0;
+  // force.data = (force_1 + force_2)/2.0;
+  force.data = force_1;
 
   force_publisher.publish(&force);
   nd.spinOnce();
