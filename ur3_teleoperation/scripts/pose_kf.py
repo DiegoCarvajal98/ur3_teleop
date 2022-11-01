@@ -27,7 +27,10 @@ class PoseKF():
         self.aruco_msg.header.stamp = rospy.Time.now()
         self.aruco_msg.child_frame_id = "marker_filtered"
 
-        self.tf_br.sendTransform(self.aruco_msg)
+        try:
+            self.tf_br.sendTransform(self.aruco_msg)
+        except (tf2_ros.TransformException):
+            pass
 
 if __name__ == '__main__':
     rospy.init_node('pose_filtering_node', anonymous=True)
