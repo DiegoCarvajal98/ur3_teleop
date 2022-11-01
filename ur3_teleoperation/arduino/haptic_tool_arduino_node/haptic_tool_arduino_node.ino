@@ -65,7 +65,7 @@ void loop() {
   float posicion;
   
   if(aMotor){
-    pwm = 2*255/5;
+    pwm = 3*255/5;
     analogWrite(motor, pwm);
   }else{
     pwm = 0;
