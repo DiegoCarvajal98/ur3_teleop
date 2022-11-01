@@ -6,14 +6,14 @@ from std_msgs.msg import Float32, Bool
 class MotorActivation():
     def __init__(self):
         self.activation = False
-        self.force_sub = rospy.Subscriber('gripper_force',Float32,self.gripperForceCallback,queue_size=1)
-        self.motor_publisher = rospy.Publisher('motor_activation',Bool,queue_size=1)
+        self.motor_publisher = rospy.Publisher('/motor_activation',Bool,queue_size=5)
+        self.force_sub = rospy.Subscriber('/gripper_force',Float32,self.gripperForceCallback,queue_size=5)
 
     def gripperForceCallback(self,msg):
         force = msg.data
-        if (force > 340 & self.activation == False):
+        if (force > 370 & self.activation == False):
             self.activation = True
-        elif (force < 290 & self.activation == True):
+        elif (force < 320 & self.activation == True):
             self.activation = False
         
         motor_msg = Bool()
