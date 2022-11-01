@@ -10,34 +10,34 @@
     <arg name="debug" default="false"/>
 
     <!-- usb_cam node for UR3 operation space -->
-    <!--node pkg="usb_cam" type="usb_cam_node" name="robot_cam" output="log">
+    <node pkg="usb_cam" type="usb_cam_node" name="robot_cam" output="log">
         <param name="video_device" value="$(arg video_device)" />
         <param name="image_width" value="$(arg image_width)" />
         <param name="image_height" value="$(arg image_height)"/>
         <param name="pixel_format" value="yuyv" />
         <param name="camera_frame_id" value="robot_cam" />
         <param name="io_method" value="mmap"/>
-    </node-->
+    </node>
 
     <!-- UR3 robot ROS Control node -->
-    <!--include file="$(find ur_robot_driver)/launch/ur3_bringup.launch">
+    <include file="$(find ur_robot_driver)/launch/ur3_bringup.launch">
         <arg name="robot_ip" value="$(arg robot_ip)"/>
         <arg name="kinematics_config" value="$(arg kinematics_config)"/>
-    </include-->
+    </include>
 
     <!-- Collision objects for planning -->
-    <!--node pkg="ur3_teleoperation" type="collision_objects_node" 
-        name="collision_objects"/-->
+    <node pkg="ur3_teleoperation" type="collision_objects_node" 
+        name="collision_objects"/>
 
     <!-- Camera_link to base_link static transform publisher -->
-    <!--node pkg="tf" type="static_transform_publisher" 
+    <node pkg="tf" type="static_transform_publisher" 
         name="camera_robot_transform" 
-        args="0 1.5 0 3.14159 0 -1.22173 world aruco_camera_link 100"/-->
+        args="0 1.5 0 3.14159 0 -1.22173 world aruco_camera_link 100"/>
 
     <!-- ArUco marker corrected frame static transform publisher -->
-    <!--node pkg="tf" type="static_transform_publisher" 
+    <node pkg="tf" type="static_transform_publisher" 
         name="aruco_corrected_transform" 
-        args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/-->
+        args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/>
 
     <!-- Robotiq 2F-85 Gripper control server node -->
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch"/>
@@ -46,16 +46,16 @@
     <node pkg="ur3_teleoperation" type="robotiq_gripper_client.py" name="robotiq_control_client"/>
 
     <!-- Robot move group node -->
-    <!--include file="$(find ur_gripper_85_moveit_config)/launch/move_group.launch">
+    <include file="$(find ur_gripper_85_moveit_config)/launch/move_group.launch">
         <arg name="ur_robot" default="$(arg ur_robot)"/>
         <arg name="allow_trajectory_execution" value="true"/>
         <arg name="fake_execution" value="false"/>
         <arg name="info" value="true"/>
         <arg name="debug" value="$(arg debug)"/>
-    </include-->
+    </include>
 
     <!-- UR3 MoveIt Commander node -->
-    <!--node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node"/-->
+    <node pkg="ur3_teleoperation" type="ur3_movegroup.py" name="ur3_moveit_node"/>
 
     <!-- ROSSerial node for gripper force sensor -->
     <node pkg="rosserial_python" type="serial_node.py" name="force_serial_node" args="$(arg force_port)"/>
