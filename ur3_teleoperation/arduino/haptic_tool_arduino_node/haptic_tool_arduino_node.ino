@@ -32,8 +32,10 @@ std_msgs::Float32 angle;
 void SubscriberCallback(const std_msgs::Bool& act){
   if(act.data){
     aMotor = true;
+    ROSINFO("Motor activated");
   }else{
     aMotor = false;
+    ROSINFO("Motor deactivated");
   }
 }
 
