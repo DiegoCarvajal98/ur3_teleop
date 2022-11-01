@@ -27,6 +27,5 @@
         args="--perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
-    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server" output="screen"/>
-    
+    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server" output="log"/>
 </launch>
