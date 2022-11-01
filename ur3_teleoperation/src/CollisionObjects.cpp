@@ -12,7 +12,7 @@ CollisionObjects::CollisionObjects(ros::NodeHandle& nh, std::string planning_gro
 	joint_model_group_ = move_group_ptr_->getCurrentState()->getJointModelGroup(planning_group);
 
 	double table_dimensions[3] = {1, 0.75, 0.69};
-	double table_pose[3] = {0, 0.64, -0.36};
+	double table_pose[3] = {0, 0.375, -0.38};
 
 	double base_dimensions[3] = {0.5, 0.5, 0.69};
 	double base_pose[3] = {0, -0.11, -0.345};

@@ -12,8 +12,8 @@ const float c = 0.1;
 
 ros::NodeHandle nd;
 
-SimpleKalmanFilter r1Filter = SimpleKalmanFilter(a, b, 0.1);
-SimpleKalmanFilter r2Filter = SimpleKalmanFilter(a, b, 0.1);
+SimpleKalmanFilter r1Filter = SimpleKalmanFilter(a, b, 0.5);
+SimpleKalmanFilter r2Filter = SimpleKalmanFilter(a, b, 0.5);
 
 float read_1;
 float read_2;

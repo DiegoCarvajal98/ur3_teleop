@@ -11,9 +11,9 @@ class MotorActivation():
 
     def gripperForceCallback(self,msg):
         force = msg.data
-        if (force > 1998.0 & self.activation == False):
+        if (force > 340 & self.activation == False):
             self.activation = True
-        elif (force < 1800.0 & self.activation == True):
+        elif (force < 290 & self.activation == True):
             self.activation = False
         
         motor_msg = Bool()

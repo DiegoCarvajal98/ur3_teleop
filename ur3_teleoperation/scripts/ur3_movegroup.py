@@ -63,7 +63,7 @@ class UR3MoveGroup(object):
         joint_goal[2] = -pi/2
         joint_goal[3] = 0
         joint_goal[4] = pi/2
-        joint_goal[5] = 0
+        joint_goal[5] = pi
 
         self.move_group.go(joint_goal, wait=True)
         self.move_group.stop()
