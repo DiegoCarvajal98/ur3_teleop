@@ -18,7 +18,7 @@
     <include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/>
 
     <!-- Aruco marker filter node -->
-    <node pkg="ur3_teleoperation" type="pose_kf.py" name="aruco_pose_filter"/>
+    <node pkg="ur3_teleoperation" type="pose_kf.py" name="aruco_pose_filter" output="log"/>
     
     <!-- Robot space image feedback node camera/color/image_raw-->
     <node pkg="rqt_image_view" type="rqt_image_view" 
@@ -27,5 +27,5 @@
         args="--perspective-file $(find ur3_teleoperation)/rqt_config/teleop_robot.perspective"/>
 
     <!-- Haptic tool min and max ranges calibration server -->
-    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server" output="log"/>
+    <node pkg="ur3_teleoperation" type="haptic_calibration_server.py" name="haptic_calibration_server" output="screen"/>
 </launch>
