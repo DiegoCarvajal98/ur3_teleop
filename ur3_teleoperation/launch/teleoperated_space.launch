@@ -30,9 +30,15 @@
         name="collision_objects"/>
 
     <!-- Camera_link to base_link static transform publisher -->
+    <!--node pkg="tf" type="static_transform_publisher" 
+        name="camera_robot_transform" 
+        args="0 1.5 0 3.14159 0 -1.22173 world aruco_camera_link 100"/-->
     <node pkg="tf" type="static_transform_publisher" 
         name="camera_robot_transform" 
-        args="0 1.5 0 3.14159 0 -1.22173 world aruco_camera_link 100"/>
+        args="0 1.5 -0.25 3.14159 0 -1,0472 world aruco_camera_link 100"/>
+    <!--node pkg="tf" type="static_transform_publisher" 
+        name="camera_robot_transform" 
+        args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/-->
 
     <!-- ArUco marker corrected frame static transform publisher -->
     <node pkg="tf" type="static_transform_publisher" 
