@@ -38,6 +38,9 @@
         name="aruco_corrected_transform" 
         args="0 0 0 3.14159 0 0 marker_frame aruco_corrected_frame 100"/>
 
+    <!-- Aruco marker filter node -->
+    <node pkg="ur3_teleoperation" type="pose_kf.py" name="aruco_pose_filter" output="log"/>
+
     <!-- Robotiq 2F-85 Gripper control server node -->
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch"/>
 

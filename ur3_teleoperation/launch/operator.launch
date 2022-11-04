@@ -16,9 +16,6 @@
 
     <!-- ArUco marker recognition node -->
     <include file='$(find ur3_teleoperation)/launch/aruco_marker_finder.launch'/>
-
-    <!-- Aruco marker filter node -->
-    <node pkg="ur3_teleoperation" type="pose_kf.py" name="aruco_pose_filter" output="log"/>
     
     <!-- Robot space image feedback node camera/color/image_raw-->
     <node pkg="rqt_image_view" type="rqt_image_view" 
