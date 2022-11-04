@@ -1,7 +1,5 @@
 <launch>
-    <arg name="video_device" default="/dev/video0"/>
-    <arg name="image_width" default="640"/>
-    <arg name="image_height" default="480"/>
+    <arg name="initial_reset" default="true"/>
     <arg name="robot_ip" default="172.16.125.53"/>
     <arg name="kinematics_config" default="$(find ur3_teleoperation)/calibration/robot_calibration.yaml"/>
     <arg name="gripper_comport" default="/dev/ttyUSB0"/>
@@ -9,15 +7,10 @@
     <arg name="ur_robot" default="ur3"/>
     <arg name="debug" default="false"/>
 
-    <!-- usb_cam node for UR3 operation space -->
-    <node pkg="usb_cam" type="usb_cam_node" name="robot_cam" output="log">
-        <param name="video_device" value="$(arg video_device)" />
-        <param name="image_width" value="$(arg image_width)" />
-        <param name="image_height" value="$(arg image_height)"/>
-        <param name="pixel_format" value="yuyv" />
-        <param name="camera_frame_id" value="robot_cam" />
-        <param name="io_method" value="mmap"/>
-    </node>
+    <!-- Realsense_cam node for UR3 operation space -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="initial_reset" value="$(arg initial_reset)"/>
+    </include>
 
     <!-- UR3 robot ROS Control node -->
     <include file="$(find ur_robot_driver)/launch/ur3_bringup.launch">
@@ -33,12 +26,12 @@
     <!--node pkg="tf" type="static_transform_publisher" 
         name="camera_robot_transform" 
         args="0 1.5 0 3.14159 0 -1.22173 world aruco_camera_link 100"/-->
-    <node pkg="tf" type="static_transform_publisher" 
-        name="camera_robot_transform" 
-        args="0 1.5 -0.25 3.14159 0 -1,0472 world aruco_camera_link 100"/>
     <!--node pkg="tf" type="static_transform_publisher" 
         name="camera_robot_transform" 
-        args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/-->
+        args="0 1.5 -0.25 3.14159 0 -1,0472 world aruco_camera_link 100"/-->
+    <node pkg="tf" type="static_transform_publisher" 
+        name="camera_robot_transform" 
+        args="0 1.5 0.25 3.14159 0 -1.57 world aruco_camera_link 100"/>
 
     <!-- ArUco marker corrected frame static transform publisher -->
     <node pkg="tf" type="static_transform_publisher" 
