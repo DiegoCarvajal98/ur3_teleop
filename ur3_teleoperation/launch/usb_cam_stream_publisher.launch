@@ -1,9 +1,10 @@
 <launch>
+    <arg name="name" default="usb"/>
     <arg name="video_device" default="/dev/video0" />
     <arg name="image_width" default="640" />
     <arg name="image_height" default="480" />
 
-    <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <node name="$(arg name)_cam" pkg="usb_cam" type="usb_cam_node" output="log" >
         <param name="video_device" value="$(arg video_device)" />
         <param name="image_width" value="$(arg image_width)" />
         <param name="image_height" value="$(arg image_height)"/>

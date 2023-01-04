@@ -51,9 +51,9 @@ void setup() {
   pinMode(motor, OUTPUT);
   pinMode(ENCODER_A, INPUT);
   pinMode(ENCODER_B, INPUT);
+  timeold = 0;
 
   // Configurar interrupción
-  timeold = 0;
   attachInterrupt(digitalPinToInterrupt(ENCODER_A), leerEncoderA,RISING);
   attachInterrupt(digitalPinToInterrupt(ENCODER_B), leerEncoderB,RISING);
 
@@ -78,8 +78,8 @@ void loop() {
   angle.data = posicion;
 
   angle_publisher.publish(&angle);
-  nh.spinOnce();
   
+  nh.spinOnce();
 }
 
 void leerEncoderA(){

@@ -13,7 +13,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   moveit_msgs
   moveit_ros_planning_interface
-  moveit_servo
 )
 
 find_package(Eigen3 REQUIRED)
@@ -110,7 +109,7 @@ find_package(Eigen3 REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES ur3_teleoperation
-  CATKIN_DEPENDS roscpp rospy std_msgs moveit_msgs moveit_servo
+  CATKIN_DEPENDS roscpp rospy std_msgs moveit_msgs
 #  DEPENDS system_lib
 )
 
@@ -148,10 +147,6 @@ include_directories(
  add_executable(collision_objects_node
   src/CollisionObjects.cpp
   src/collision_objects_node.cpp
- )
-
- add_executable(test_node 
-  src/test.cpp
  )
 
 ## Rename C++ executable without prefix

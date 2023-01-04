@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import numpy as np
 
 class SimpleKalmanFilter():
     # mea_e: Measurement uncertainty

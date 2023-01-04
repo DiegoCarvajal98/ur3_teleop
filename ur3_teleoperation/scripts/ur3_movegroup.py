@@ -6,9 +6,15 @@ import tf2_ros
 import moveit_commander
 from moveit_msgs.msg import DisplayTrajectory
 from geometry_msgs.msg import Pose
+from ur_dashboard_msgs.srv import Load, LoadRequest
+from std_srvs.srv import Trigger, TriggerRequest
 from math import pi
 
 class UR3MoveGroup(object):
+    def shutdown(self):
+        stop_req = TriggerRequest()
+        self.stop_prog.call(stop_req)
+        rospy.logdebug("SHUTTING DOWN")
         
     def tfListenerCallback(self, event):
         if self.tf_buffer.can_transform('base_link','marker_frame',rospy.Time(0)):
@@ -43,6 +49,7 @@ class UR3MoveGroup(object):
             rospy.logdebug("Can't transform")
 
     def __init__(self):
+        rospy.on_shutdown(self.shutdown)
         
         moveit_commander.roscpp_initialize(sys.argv)
         self.tf_buffer = tf2_ros.Buffer()
@@ -56,6 +63,21 @@ class UR3MoveGroup(object):
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                         DisplayTrajectory,
                                                         queue_size=10)
+
+        # Start UR3 robot
+        rospy.wait_for_service("ur_hardware_interface/dashboard/load_program")
+        self.load_prog =  rospy.ServiceProxy("ur_hardware_interface/dashboard/load_program", Load)
+        load_req = LoadRequest()
+        load_req.filename = "ROS_control.urp"
+        self.load_prog.call(load_req)
+
+        rospy.wait_for_service("ur_hardware_interface/dashboard/play")
+        self.play_prog =  rospy.ServiceProxy("ur_hardware_interface/dashboard/play", Trigger)
+        play_req = TriggerRequest()
+        self.play_prog.call(play_req)
+
+        rospy.wait_for_service("ur_hardware_interface/dashboard/stop")
+        self.stop_prog =  rospy.ServiceProxy("ur_hardware_interface/dashboard/stop", Trigger)
         
         joint_goal = self.move_group.get_current_joint_values()
         joint_goal[0] = -pi/2
