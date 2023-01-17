@@ -1,3 +1,6 @@
+/*
+Header file for the creation of the collision objects in the planning scene
+*/
 #pragma once
 
 #include <ros/ros.h>
