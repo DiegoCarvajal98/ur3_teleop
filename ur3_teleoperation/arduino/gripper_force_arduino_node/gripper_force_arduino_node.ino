@@ -1,20 +1,30 @@
-// Lectura de fuerza 2Kg - unit test
+/*
+Arduino ROS node for reading force measures on the Robotiq 2F-85
+gripper coupled to the UR3 robot
+*/
+
+// Include libraries
 #include <SimpleKalmanFilter.h>
 #include <ros.h>
 #include <std_msgs/Float32.h>
 
+// Define force sensors input pins
 #define FSR1 A0
 #define FSR2 A1
 
+// Kalman filter constants
 const float a = 98.5202077002541;
 float b = 98.5202077002541;
-const float c = 0.1;
+const float c = 0.5;
 
+// Define ROS Node Handle
 ros::NodeHandle nd;
 
-SimpleKalmanFilter r1Filter = SimpleKalmanFilter(a, b, 0.5);
-SimpleKalmanFilter r2Filter = SimpleKalmanFilter(a, b, 0.5);
+// Define kalman filters
+SimpleKalmanFilter r1Filter = SimpleKalmanFilter(a, b, c);
+SimpleKalmanFilter r2Filter = SimpleKalmanFilter(a, b, c);
 
+// Define variables
 float read_1;
 float read_2;
 float filtRead1;
@@ -23,10 +33,13 @@ float force_1;
 float force_2;
 std_msgs::Float32 force;
 
+// Define force publisher
 ros::Publisher force_publisher("gripper_force", &force);
 
 void setup() {
-  Serial.begin(115200);
+  /*
+  Initialize ROS node and advertise force message
+  */
   nd.initNode();
   nd.advertise(force_publisher);
 }
@@ -52,5 +65,8 @@ void loop() {
 
 float fmap(float x, float in_min, float in_max, float out_min, float out_max)
 {
+  /*
+  Mapping function for float numbers
+  */
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
